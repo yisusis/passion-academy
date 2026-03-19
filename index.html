@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Passion Academy | Empowering Learners</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        #active { 
+            text-decoration: underline;
+        }
+
+        /* Subtle Glow Effect for the Address Link */
+        .footer-address-link {
+            color: inherit; /* Keeps the text white/standard */
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .footer-address-link:hover {
+            color: #00d4ff; /* Brighter blue on hover */
+            text-shadow: 0 0 8px rgba(0, 212, 255, 0.4); /* Very little glow */
+            transform: translateY(-2px); /* Tiny lift effect */
+        }
+        .btn-primary{
+            transition: all 0.3s ease;
+            background: transparent;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+          }
+          .btn-secondary{
+            background:  blue;
+            color: #ffffff;
+            border: 2px solid blue;
+            animation: floatUp 1sec ease;
+          }
+          .blue-text{
+            color: rgb(25, 25, 206);
+          }  
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="Transparent passion logo.png" alt="Passion Academy Logo" class="school-logo">
+            <div class="logo-text">PASSION <span>ACADEMY</span></div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/" id="active">Home</a></li>
+            <li><a href="academics.html">Academics</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="admission.html">Admission</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>
+    </nav>
+
+    <header id="home" class="hero">
+        <div class="hero-content" data-aos="fade-up" data-aos-duration="1800">
+            <span class="badge">Est. 2022</span>
+           <h1 class="learners"> Empowering
+    Learners for a <br>
+    <span class="blue-text">Brighter Future</span>
+</h1>
+            <p>Providing a well-rounded education that challenges students' intellect and stimulates creativity.</p>
+            <div class="hero-btns">
+                <a href="academics.html" class="btn-primary">Explore Programs</a>
+                <a href="admission.html" class="btn-secondary">Apply Now</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="unified-stats-academics">
+        
+        <div class="stats-container">
+            <div class="stat" data-aos="zoom-in" data-aos-duration="1800">
+                <h2 class="counter" data-target="1273">0</h2>
+                <p>Students</p>
+            </div>
+            <div class="stat" data-aos="zoom-in" data-aos-delay="200" data-aos-duration="1800">
+                <h2 class="counter" data-target="133">0</h2>
+                <p>Staff Members</p>
+            </div>
+            <div class="stat" data-aos="zoom-in" data-aos-delay="400" data-aos-duration="1800">
+                <h2 class="counter" data-target="3">0</h2>
+                <p>Dedicated Yards</p>
+            </div>
+        </div>
+<div class="academic-grid">
+    <a href="academics.html" class="glass-card" data-aos="fade-up">
+        <i class="fas fa-shapes"></i>
+        <h3>Kindergarten (KG)</h3>
+        <p>A nurturing environment with a private yard designed for early discovery and creative play.</p>
+    </a>
+
+    <a href="academics.html" class="glass-card" data-aos="fade-up" data-aos-delay="200">
+        <i class="fas fa-child"></i>
+        <h3>Primary School (1-8)</h3>
+        <p>Building strong foundations with fully equipped laboratories and active learning spaces.</p>
+    </a>
+
+    <a href="academics.html" class="glass-card" data-aos="fade-up" data-aos-delay="300">
+        <i class="fas fa-microscope"></i>
+        <h3>High School (9-12)</h3>
+        <p>Comprehensive Secondary and Preparatory education with high-end science labs and massive library access.</p>
+    </a>
+</div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-grid">
+            <div>
+                <h3>Passion Academy</h3>
+                <p>
+                    <a href="https://maps.google.com" target="_blank" class="footer-address-link">
+                        Kolfe Keranio Sub City, Addis Ababa
+                    </a>
+                </p>
+                <p>+251 900 03 55 55</p>
+            </div>
+            <div class="socials">
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-telegram"></i>
+                <i class="fab fa-instagram"></i>
+            </div>
+        </div>
+        <p class="copyright">© 2026 Passion Academy | Built by Yishak Sisay</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ 
+            duration: 1800, 
+            once: true 
+        });
+
+        const counters = document.querySelectorAll('.counter');
+        const speed = 50; 
+
+        const startCounters = () => {
+            counters.forEach(counter => {
+                const updateCount = () => {
+                    const target = +counter.getAttribute('data-target');
+                    const count = +counter.innerText;
+                    const inc = target / speed; 
+
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count + inc);
+                        setTimeout(updateCount, 25); 
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                updateCount();
+            });
+        };
+
+        let observer = new IntersectionObserver((entries) => {
+            if(entries[0].isIntersecting) {
+                startCounters();
+                observer.disconnect(); 
+            }
+        }, { threshold: 0.2 }); 
+
+        const targetSection = document.querySelector('.unified-stats-academics');
+        if (targetSection) {
+            observer.observe(targetSection);
+        }
+    </script>
+</body>
+</html>

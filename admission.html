@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission | Passion Academy</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        /* Specific Styles for the Aesthetic Form */
+        .admission-hero {
+            background: linear-gradient(rgba(0, 74, 153, 0.7), rgba(0, 45, 95, 0.8)), 
+                        url('https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=2070');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 180px 10% 120px;
+            text-align: center;
+        }
+
+        .form-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            max-width: 800px;
+            margin: -60px auto 80px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .form-group { margin-bottom: 25px; }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #002d5f;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+
+        .form-group input:focus, .form-group select:focus {
+            border-color: var(--primary-blue);
+            outline: none;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="passion logo.jpg" alt="Logo" class="school-logo">
+            <div class="logo-text">PASSION <span>ACADEMY</span></div>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="academics.html">Academics</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="admission.html" id="active">Admission</a></li>
+            <li><a href="contact.html">Contact Us</a></li>
+        </ul>   
+    </nav>
+
+    <header class="admission-hero">
+        <h1 data-aos="fade-up" style="font-size: 3.5rem;">Begin Your Journey</h1>
+        <p data-aos="fade-up" data-aos-delay="200" style="font-size: 1.2rem; opacity: 0.9;">Join a community of learners dedicated to excellence.</p>
+    </header>
+
+    <div class="unified-stats-academics" style="padding-top: 20px;">
+        
+        <section class="container" style="padding: 0 10%;">
+            <div class="form-card" data-aos="zoom-in">
+                <h2 style="text-align: center; margin-bottom: 30px; color: var(--primary-blue); font-size: 2rem;">Student Registration</h2>
+                
+                <form id="admissionForm">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                        <div class="form-group">
+                            <label>Student First Name</label>
+                            <input type="text" placeholder="e.g. Abebe" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Student Last Name</label>
+                            <input type="text" placeholder="e.g. Kebede" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Parent/Guardian Email</label>
+                        <input type="email" placeholder="email@example.com" required>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                        <div class="form-group">
+                            <label>Applying For</label>
+                            <select required>
+                                <option value="">Select Level</option>
+                                <option>Primary (Grades 1-8)</option>
+                                <option>Secondary (Grades 9-10)</option>
+                                <option>Preparatory (Grades 11-12)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Contact Phone</label>
+                            <input type="tel" placeholder="+251 ..." required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Additional Message (Optional)</label>
+                        <textarea placeholder="Tell us more about the student..." style="height: 100px; font-family: inherit;"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-primary" style="width: 100%; font-size: 1.1rem; padding: 15px; cursor: pointer; border: none; border-radius: 10px;">Submit Application</button>
+                </form>
+            </div>
+        </section>
+
+    </div> <footer style="padding: 40px 10%; background: #002d5f; color: white; text-align: center;">
+        <p>Passion Academy &copy; 2026 | Admission Office</p>
+    </footer>
+
+   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 1000, once: true });
+    
+    // This is the NEW "Smart" version that talks to your Database
+    document.getElementById('admissionForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // 1. Gather the data from the form
+        const formData = {
+            firstName: this.querySelectorAll('input')[0].value,
+            lastName: this.querySelectorAll('input')[1].value,
+            email: this.querySelectorAll('input')[2].value,
+            level: this.querySelector('select').value,
+            phone: this.querySelectorAll('input')[3].value,
+            message: this.querySelector('textarea').value
+        };
+
+        // 2. Send it to your Node.js server
+        const response = await fetch('/api/apply', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+            alert('Success! Your application is saved in the database.');
+            this.reset();
+        } else {
+            alert('Error saving application.');
+        }
+    });
+</script>
+</body>
+</html>
