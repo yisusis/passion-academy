@@ -222,42 +222,41 @@
         <p style="margin: 0;">Passion Academy © 2026 | Developed by Yishak Sisay</p>
     </footer>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({ duration: 1000, once: true });
-        
-        document.getElementById('contactForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration: 1000, once: true });
+    
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
 
-            // Prepare the data from form inputs
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                message: document.getElementById('message').value,
-                subject: "Website Inquiry"
-            };
+        const formData = {
+            name: document.getElementById('name').value,
+            email: document.getElementById('email').value,
+            message: document.getElementById('message').value,
+            subject: "Website Inquiry"
+        };
 
-            try {
-                // Send data to the server
-                const response = await fetch('/api/contact', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
-                });
+        try {
+            // Updated to relative path /api/contact
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
 
-                if (response.ok) {
-                    alert('✨ Success! Your message has been sent to the database.');
-                    this.reset(); // Clear the form
-                } else {
-                    const errorData = await response.json();
-                    alert('❌ Error: ' + errorData.error);
-                }
-            } catch (error) {
-                console.error('Submission Error:', error);
-                alert('❌ Connection failed. Make sure your server is running on port 5000!');
+            if (response.ok) {
+                alert('✨ Success! Your message has been sent to the database.');
+                this.reset(); 
+            } else {
+                const errorData = await response.json();
+                alert('❌ Error: ' + errorData.error);
             }
-        });
-    </script>
+        } catch (error) {
+            console.error('Submission Error:', error);
+            alert('❌ Connection failed. The server might be restarting.');
+        }
+    });
+</script>
 
 </body>
 </html>

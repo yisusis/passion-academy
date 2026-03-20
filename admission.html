@@ -129,15 +129,13 @@
         <p>Passion Academy &copy; 2026 | Admission Office</p>
     </footer>
 
-   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+ <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
     AOS.init({ duration: 1000, once: true });
     
-    // This is the NEW "Smart" version that talks to your Database
     document.getElementById('admissionForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        // 1. Gather the data from the form
         const formData = {
             firstName: this.querySelectorAll('input')[0].value,
             lastName: this.querySelectorAll('input')[1].value,
@@ -147,18 +145,23 @@
             message: this.querySelector('textarea').value
         };
 
-        // 2. Send it to your Node.js server
-        const response = await fetch('/api/apply', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData)
-        });
+        try {
+            // Using a relative path so it works on Render automatically
+            const response = await fetch('/api/apply', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
 
-        if (response.ok) {
-            alert('Success! Your application is saved in the database.');
-            this.reset();
-        } else {
-            alert('Error saving application.');
+            if (response.ok) {
+                alert('✨ Success! Your application has been saved.');
+                this.reset();
+            } else {
+                alert('❌ Error saving application. Check the server logs.');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('❌ Connection failed. Check your internet or server status.');
         }
     });
 </script>
